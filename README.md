@@ -46,7 +46,7 @@ Siga o passo a passo abaixo para rodar o sistema no seu seu ambiente local:
 
 3. **Instale as dependências requeridas**
    ```bash
-   pip install django
+   pip install -r requirements.txt
    ```
 
 4. **Realize as migrações do banco de dados**
