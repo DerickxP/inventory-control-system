@@ -23,6 +23,7 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 - **[Django](https://www.djangoproject.com/)** - Framework web robusto que incentiva o desenvolvimento limpo, seguro e rápido.
 - **HTML5 & CSS3** - Estruturação e estilização das páginas, proporcionando uma interface limpa e elegante.
 - **SQLite3** - Banco de dados embutido utilizado para armazenar os registros do estoque (padrão do Django).
+- **[Gunicorn](https://gunicorn.org/)** - Servidor HTTP WSGI utilizado para rodar a aplicação em ambiente de produção.
 
 ## 🛠️ Como Executar o Projeto Localmente
 
