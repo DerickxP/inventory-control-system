@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Controle de Estoque</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'controle/style.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Produtos em Estoque</h1>
+
+        <p>
+            <a class="btn" href="{% url 'cria_produto' %}">Cadastrar novo produto</a>
+        </p>
+
+        <ul class="produtos">
+            {% for p in produtos %}
+            <li>
+                <span>
+                    <strong>{{ p.nome }}</strong> ({{ p.codigo }}) -
+                    Saldo: {{ p.quantidade_atual }} |
+                    Estoque mínimo: {{ p.estoque_minimo }}
+                    {% if p.quantidade_atual < p.estoque_minimo %} <span class="badge-alerta">⚠ ESTOQUE BAIXO</span>
+                {% endif %}
+                </span>
+                <span>
+                    <a href="{% url 'registra_movimentacao' p.id %}">Movimentar</a>
+                </span>
+            </li>
+            {% empty %}
+            <li>Nenhum produto cadastrado.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

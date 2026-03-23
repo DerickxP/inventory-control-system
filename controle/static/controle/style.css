@@ -1,0 +1,113 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f4f4f9;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 20px 24px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+    margin-bottom: 16px;
+    color: #333333;
+}
+
+a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button,
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+button:hover,
+.btn:hover {
+    background: #1d4ed8;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: #444444;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    margin-bottom: 4px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+}
+
+ul.produtos {
+    list-style: none;
+    margin-top: 16px;
+}
+
+ul.produtos li {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge-alerta {
+    color: #b91c1c;
+    font-weight: 700;
+}
+
+.mensagem-erro {
+    color: #b91c1c;
+    margin-bottom: 8px;
+}
+
+.mensagem-sucesso {
+    color: #15803d;
+    margin-bottom: 8px;
+}
