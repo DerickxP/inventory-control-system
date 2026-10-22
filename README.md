@@ -1,75 +1,62 @@
-# 📦 Inventory Control System (Controle de Estoque)
+# Controle de estoque em Django
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![Gunicorn](https://img.shields.io/badge/gunicorn-%23499848.svg?style=for-the-badge&logo=gunicorn&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-6.0-092E20?logo=django&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?logo=sqlite&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-Um sistema web completo de **Controle de Estoque** desenvolvido em Python com o framework Django. O projeto foi projetado para facilitar o gerenciamento de produtos, o acompanhamento de quantidades e o registro do histórico de movimentações (entradas e saídas).
+Aplicação web para controlar o estoque de produtos: cadastro, saldo atual de cada
+item, lançamento de entradas e saídas e alerta quando um produto fica abaixo do
+estoque mínimo.
 
-## 🎯 Objetivos do Projeto
+## Funcionalidades
 
-O objetivo principal deste projeto é fornecer uma ferramenta intuitiva e eficiente para a gestão de inventário. Funcionalidades de destaque incluem:
-- **Cadastro de Produtos:** Adição de novos itens detalhando código, nome, categoria e exigência mínima de estoque.
-- **Acompanhamento de Saldos:** Visão clara e em tempo real da quantidade atual de todos os produtos do estoque.
-- **Registro de Movimentações:** Ferramenta dedicada para lançamento de entradas e saídas de um produto específico, mantendo um histórico auditável das operações.
-- **Prevenção de Rupturas:** Emissão de alertas visuais e automáticos (⚠ **ESTOQUE BAIXO**) sempre que um produto atinge ou fica abaixo do seu limite seguro.
+- **Cadastro de produtos** com código (único), nome, categoria e estoque mínimo.
+- **Lista de produtos** ordenada por nome, com o saldo atual e o estoque mínimo de cada um.
+- **Alerta de estoque baixo** (`⚠ ESTOQUE BAIXO`) quando o saldo fica abaixo do mínimo.
+- **Movimentações de entrada e saída** com quantidade e observação. Cada lançamento é
+  gravado com data e hora e atualiza o saldo do produto.
+- **Validações:** a quantidade precisa ser maior que zero e uma saída não pode ser
+  maior que o saldo atual.
+- **Admin do Django** com busca e filtros para produtos e para o histórico de movimentações.
 
-## 🚀 Tecnologias e Frameworks
+## Como funciona
 
-Este projeto foi construído utilizando as seguintes tecnologias:
-- **[Python](https://www.python.org/)** - Linguagem back-end ágil e poderosa.
-- **[Django](https://www.djangoproject.com/)** - Framework web robusto que incentiva o desenvolvimento limpo, seguro e rápido.
-- **HTML5 & CSS3** - Estruturação e estilização das páginas, proporcionando uma interface limpa e elegante.
-- **SQLite3** - Banco de dados embutido utilizado para armazenar os registros do estoque (padrão do Django).
-- **[Gunicorn](https://gunicorn.org/)** - Servidor HTTP WSGI utilizado para rodar a aplicação em ambiente de produção.
+| Rota | O que faz |
+|---|---|
+| `/` | Lista de produtos com saldo e alerta |
+| `/produtos/novo/` | Cadastro de produto |
+| `/produtos/<id>/movimentacao/` | Lançamento de entrada ou saída |
+| `/admin/` | Administração de produtos e movimentações |
 
-## 🛠️ Como Executar o Projeto Localmente
+O modelo tem duas tabelas: `Produto` e `Movimentacao`, ligada ao produto. O saldo
+fica em `Produto.quantidade_atual` e é atualizado a cada movimentação.
 
-Siga o passo a passo abaixo para rodar o sistema no seu seu ambiente local:
+```
+controle/   # app: models, views, rotas, templates e CSS
+estoque/    # configurações do projeto Django
+```
 
-1. **Clone este repositório**
-   ```bash
-   git clone https://github.com/DerickxP/inventory-control-system.git
-   cd inventory-control-system
-   ```
+## Como rodar
 
-2. **Crie e ative um ambiente virtual (recomendado)**
-   ```bash
-   python -m venv venv
-   
-   # No Windows
-   venv\Scripts\activate
-   
-   # No Linux/Mac
-   source venv/bin/activate
-   ```
+```bash
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser   # opcional, para acessar /admin/
+python manage.py runserver
+```
 
-3. **Instale as dependências requeridas**
-   ```bash
-   pip install -r requirements.txt
-   ```
+Acesse `http://localhost:8000/`. O banco é um SQLite criado na primeira migração.
 
-4. **Realize as migrações do banco de dados**
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   ```
+## Limitações
 
-5. **Inicie o servidor de desenvolvimento**
-   ```bash
-   python manage.py runserver
-   ```
-   Acesse a aplicação no seu navegador padrão pelo endereço: `http://localhost:8000/`.
+- As telas de produtos e movimentações não exigem login; só o `/admin/` é protegido.
+- O histórico de movimentações só pode ser consultado pelo admin.
+- O modelo tem preço de compra e de venda, mas o formulário de cadastro ainda não preenche esses campos.
+- O projeto está configurado para desenvolvimento (`DEBUG = True`) e ainda não tem testes automatizados.
 
-## 📂 Estrutura do Projeto
+## Licença
 
-- `controle/`: App principal contendo a lógica de negócios, Models (tabelas do banco de dados), Views, e rotas locais.
-- `estoque/`: Ponto de entrada e diretório de configurações principais do projeto Django.
-- `templates/`: Páginas HTML.
-- `static/`: Recursos estáticos incluindo folhas de estilo em CSS.
-
----
-
-💼 Projeto desenvolvido por [DerickxP](https://github.com/DerickxP)
+[MIT](LICENSE)
